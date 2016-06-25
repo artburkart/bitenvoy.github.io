@@ -1,0 +1,36 @@
+baseurl = "http://replace-this-with-your-hugo-site.com/"
+languageCode = "en-us"
+title = "BitEnvoy"
+theme = "hugo-alabaster-theme"
+
+disqusShortname = ""
+googleAnalytics = ""
+
+[params]
+	name = "BitEnvoy"
+	description = "An open source, cross-platform, cross-provider, pull-based deployment tool designed for flexible delivery of artifacts."
+
+	github_user   = "artburkart"
+	github_repo   = "bitenvoy"
+	github_banner = true
+
+	custom_css = []
+	custom_js  = []
+
+	highlightjs = "css/highlight.css"
+	favicon = "favicon.ico"
+
+[params.sidebar]
+	logo = "favicon.ico"
+
+
+	github_button  = true
+	travis_button  = false
+	codecov_button = false
+	gratipay = ""
+
+	show_relations = true
+
+[params.footer]
+	copyright = "[bitenvoy](https://github.com/artburkart/bitenvoy)"
+	show_powered_by = true
