@@ -1,7 +1,9 @@
-baseurl = "http://replace-this-with-your-hugo-site.com/"
+baseurl = "http://bitenvoy.github.io/"
 languageCode = "en-us"
 title = "BitEnvoy"
 theme = "hugo-alabaster-theme"
+contentdir = "content"
+canonifyurls = true
 
 disqusShortname = ""
 googleAnalytics = ""
