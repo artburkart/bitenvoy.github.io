@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BitEnvoy</title>
+    <link>http://bitenvoy.github.io/</link>
+    <description>Recent content on BitEnvoy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Apr 2016 15:21:22 +0200</lastBuildDate>
+    <atom:link href="http://bitenvoy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>BitEnvoy</title>
+      <link>http://bitenvoy.github.io/</link>
+      <pubDate>Sat, 23 Apr 2016 15:21:22 +0200</pubDate>
+      
+      <guid>http://bitenvoy.github.io/</guid>
+      <description>
+
+&lt;h2 id=&#34;what-could-bitenvoy-be&#34;&gt;What could BitEnvoy be?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/artburkart/bitenvoy&#34;&gt;BitEnvoy&lt;/a&gt; will be an open
+source, cross-platform, cross-provider, pull-based deployment tool
+designed for flexible delivery of code, static files, and other
+artifacts.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-does-bitenvoy-solve&#34;&gt;What does BitEnvoy solve?&lt;/h2&gt;
+
+&lt;p&gt;BitEnvoy is a solution for the deployment/delivery piece of your
+software development pipeline. Let&amp;rsquo;s say your pipeline looks like the
+following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://s32.postimg.org/z89g8e54l/typical_deployment.png&#34; alt=&#34;VCS to CI to Unknown to Live Servers&#34; title=&#34;VCS to CI to Unknown to Live Servers&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A common approach to deploying artifacts is to lock a branch of your
+software&amp;rsquo;s VCS system to a set of target servers. For example, if git is
+the VCS of choice, a repository&amp;rsquo;s &lt;code&gt;staging&lt;/code&gt; branch might be locked to a
+set of servers responsible for serving a webpage at
+&lt;code&gt;https://staging.example.com&lt;/code&gt;. Once code is pushed to that branch, a CI
+system like Jenkins is typically triggered to exercise a series of tests
+on the latest code revision for the staging branch. Once all the tests
+pass, Jenkins is usually responsible for delivering the code to the
+staging servers. This is typically performed using &lt;code&gt;scp&lt;/code&gt;, &lt;code&gt;rsync&lt;/code&gt;,
+&lt;code&gt;sftp&lt;/code&gt;, or by some other means that requires your CI tool to have direct
+access to the target servers.&lt;/p&gt;
+
+&lt;p&gt;Often the CI tool is used to update the code revision with sensitive
+information like database secrets. Unless a CI tool is installed for
+each target deployment environment, this strategy establishes a single
+point of failure where all of a company&amp;rsquo;s sensitive database and API
+information can be accessed freely if the CI tool is ever compromised.&lt;/p&gt;
+
+&lt;p&gt;Even if no secrets are passed through the CI tool, and even if some
+intermediate deployer server is used for deployments, the intermediate
+deployer server is often hand-rolled as a simple stopgap that provides
+minimal flexibility around deployment strategies and unsatisfactory
+feedback for success and failure status of deployments.&lt;/p&gt;
+
+&lt;p&gt;These are the problems BitEnvoy will solve.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-will-bitenvoy-solve-these-problems&#34;&gt;How will BitEnvoy solve these problems?&lt;/h2&gt;
+
+&lt;p&gt;The initial idea is BitEnvoy will be split into two distinct parts:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;deployment agent&lt;/li&gt;
+&lt;li&gt;deployer hub&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The deployment agent will be designed such that it can be installed with
+minimal effort on as many operating systems as possible. Agents will
+poll the deployer hub for deployment jobs to execute. When a deployment
+agent is assigned a deployment job, the agent will download an
+instruction set indicated within the deployment job&amp;rsquo;s payload and begin
+executing instructions contained therein. During the attempted
+deployment, the agent continuously updates the deployer hub with the
+state of the deployment. Since the agents live on the target servers,
+they only know the sensitive information they need to know and nothing
+more.&lt;/p&gt;
+
+&lt;p&gt;The deployer hub will initiate and coordinate deployments for the
+agents. It can be given read-only access to your various cloud provider
+APIs to collect metadata about servers where you have a deployment agent
+installed. This information will be used to group agents together for
+various artifact deployments. The deployer hub will also be used to
+design deployment strategies for each agent grouping. A deployment
+strategy could be &amp;ldquo;deploy to all agents at the same time&amp;rdquo; or &amp;ldquo;deploy to
+agents in this specific order.&amp;rdquo; In addition to deployment grouping and
+strategy execution, the deployer hub will serve as the dashboard for
+deployment statuses and as a mechanism for one-off deployments of
+previously tested code revisions.&lt;/p&gt;
+
+&lt;p&gt;With these two pieces BitEnvoy will serve as an integral tool for
+monitoring and actuating the deployment of software to your cloud
+ecosystem.&lt;/p&gt;
+
+&lt;h2 id=&#34;that-s-the-idea&#34;&gt;That&amp;rsquo;s the idea&lt;/h2&gt;
+
+&lt;p&gt;In its full glory, BitEnvoy could be an enormous project that results in
+months of active development before it ever sees the light of day. We
+don&amp;rsquo;t want it to be this way. Instead, we&amp;rsquo;re asking you what you want to
+see first.&lt;/p&gt;
+
+&lt;p&gt;Below is a list of what we think are the most exciting features BitEnvoy
+could offer. If you&amp;rsquo;re interested in this project, please &lt;a href=&#34;https://github.com/artburkart/bitenvoy&#34;&gt;give it a star on GitHub&lt;/a&gt;
+and take a look at the issues we&amp;rsquo;ve created. If you&amp;rsquo;re interested in one
+of the issues, give it a thumbs up and we&amp;rsquo;ll prioritize its implementation
+accordingly!&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[Cloud-provider metadata discovery]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;li&gt;[]()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Thanks for your support!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/artburkart&#34;&gt;Arthur Burkart&lt;/a&gt;, Cara Pacifico, Tadashi Kamitaki&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

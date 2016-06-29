@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="An open source, cross-platform, cross-provider, pull-based deployment tool designed for flexible delivery of artifacts.">
+	<meta name="generator" content="Hugo 0.16" />
+	
+	<title> BitEnvoy</title>
+	
+	<link rel="stylesheet" href="http://bitenvoy.github.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="http://bitenvoy.github.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="http://bitenvoy.github.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+	<body role="document">
+		<div class="document">
+			<div class="documentwrapper">
+				<div class="bodywrapper">
+					<div class="body" role="main">
+						
+	
+		<h1>BitEnvoy</h1>
+		
+
+<h2 id="what-could-bitenvoy-be">What could BitEnvoy be?</h2>
+
+<p><a href="https://github.com/artburkart/bitenvoy">BitEnvoy</a> will be an open
+source, cross-platform, cross-provider, pull-based deployment tool
+designed for flexible delivery of code, static files, and other
+artifacts.</p>
+
+<h2 id="what-does-bitenvoy-solve">What does BitEnvoy solve?</h2>
+
+<p>BitEnvoy is a solution for the deployment/delivery piece of your
+software development pipeline. Let&rsquo;s say your pipeline looks like the
+following:</p>
+
+<p><img src="https://s32.postimg.org/z89g8e54l/typical_deployment.png" alt="VCS to CI to Unknown to Live Servers" title="VCS to CI to Unknown to Live Servers" /></p>
+
+<p>A common approach to deploying artifacts is to lock a branch of your
+software&rsquo;s VCS system to a set of target servers. For example, if git is
+the VCS of choice, a repository&rsquo;s <code>staging</code> branch might be locked to a
+set of servers responsible for serving a webpage at
+<code>https://staging.example.com</code>. Once code is pushed to that branch, a CI
+system like Jenkins is typically triggered to exercise a series of tests
+on the latest code revision for the staging branch. Once all the tests
+pass, Jenkins is usually responsible for delivering the code to the
+staging servers. This is typically performed using <code>scp</code>, <code>rsync</code>,
+<code>sftp</code>, or by some other means that requires your CI tool to have direct
+access to the target servers.</p>
+
+<p>Often the CI tool is used to update the code revision with sensitive
+information like database secrets. Unless a CI tool is installed for
+each target deployment environment, this strategy establishes a single
+point of failure where all of a company&rsquo;s sensitive database and API
+information can be accessed freely if the CI tool is ever compromised.</p>
+
+<p>Even if no secrets are passed through the CI tool, and even if some
+intermediate deployer server is used for deployments, the intermediate
+deployer server is often hand-rolled as a simple stopgap that provides
+minimal flexibility around deployment strategies and unsatisfactory
+feedback for success and failure status of deployments.</p>
+
+<p>These are the problems BitEnvoy will solve.</p>
+
+<h2 id="how-will-bitenvoy-solve-these-problems">How will BitEnvoy solve these problems?</h2>
+
+<p>The initial idea is BitEnvoy will be split into two distinct parts:</p>
+
+<ul>
+<li>deployment agent</li>
+<li>deployer hub</li>
+</ul>
+
+<p>The deployment agent will be designed such that it can be installed with
+minimal effort on as many operating systems as possible. Agents will
+poll the deployer hub for deployment jobs to execute. When a deployment
+agent is assigned a deployment job, the agent will download an
+instruction set indicated within the deployment job&rsquo;s payload and begin
+executing instructions contained therein. During the attempted
+deployment, the agent continuously updates the deployer hub with the
+state of the deployment. Since the agents live on the target servers,
+they only know the sensitive information they need to know and nothing
+more.</p>
+
+<p>The deployer hub will initiate and coordinate deployments for the
+agents. It can be given read-only access to your various cloud provider
+APIs to collect metadata about servers where you have a deployment agent
+installed. This information will be used to group agents together for
+various artifact deployments. The deployer hub will also be used to
+design deployment strategies for each agent grouping. A deployment
+strategy could be &ldquo;deploy to all agents at the same time&rdquo; or &ldquo;deploy to
+agents in this specific order.&rdquo; In addition to deployment grouping and
+strategy execution, the deployer hub will serve as the dashboard for
+deployment statuses and as a mechanism for one-off deployments of
+previously tested code revisions.</p>
+
+<p>With these two pieces BitEnvoy will serve as an integral tool for
+monitoring and actuating the deployment of software to your cloud
+ecosystem.</p>
+
+<h2 id="that-s-the-idea">That&rsquo;s the idea</h2>
+
+<p>In its full glory, BitEnvoy could be an enormous project that results in
+months of active development before it ever sees the light of day. We
+don&rsquo;t want it to be this way. Instead, we&rsquo;re asking you what you want to
+see first.</p>
+
+<p>Below is a list of what we think are the most exciting features BitEnvoy
+could offer. If you&rsquo;re interested in this project, please <a href="https://github.com/artburkart/bitenvoy">give it a star on GitHub</a>
+and take a look at the issues we&rsquo;ve created. If you&rsquo;re interested in one
+of the issues, give it a thumbs up and we&rsquo;ll prioritize its implementation
+accordingly!</p>
+
+<ul>
+<li>[Cloud-provider metadata discovery]()</li>
+<li>[]()</li>
+<li>[]()</li>
+<li>[]()</li>
+<li>[]()</li>
+<li>[]()</li>
+<li>[]()</li>
+<li>[]()</li>
+<li>[]()</li>
+<li>[]()</li>
+<li>[]()</li>
+<li>[]()</li>
+</ul>
+
+<p>Thanks for your support!</p>
+
+<p><a href="https://github.com/artburkart">Arthur Burkart</a>, Cara Pacifico, Tadashi Kamitaki</p>
+
+	
+
+
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+	<div class="sphinxsidebarwrapper">
+		<p class="logo">
+			<a href="http://bitenvoy.github.io/">
+				<img class="logo" src="http://bitenvoy.github.io/favicon.ico" alt="Logo"/>
+				<h1 class="logo logo-name">BitEnvoy</h1>
+			</a>
+		</p>
+		
+		<p class="blurb">An open source, cross-platform, cross-provider, pull-based deployment tool designed for flexible delivery of artifacts.</p>
+
+		
+
+	<p>
+		<iframe src="https://ghbtns.com/github-btn.html?user=artburkart&repo=bitenvoy&type=watch&count=true&size=large"
+		allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+	</p>
+
+	
+
+	
+		
+
+		
+
+<h3>Navigation</h3>
+<ul>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="http://bitenvoy.github.io/./">BitEnvoy</a>
+	</li>
+	
+</ul>
+
+
+		
+
+	</div>
+</div>
+<div class="clearer"></div>
+</div>
+			<div class="footer">
+	&copy; 2016 <a href="https://github.com/artburkart/bitenvoy">bitenvoy</a>
+	|
+	Powered by <a href="http://gohugo.io/">Hugo 0.16</a>
+	&amp; <a href="https://github.com/digitalcraftsman/hugo-alabaster-theme">Alabaster</a>
+	
+</div>
+
+<a href="https://github.com/artburkart/bitenvoy" class="github">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" class="github"/>
+</a>
+
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>
